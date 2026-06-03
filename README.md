@@ -1,0 +1,2 @@
+# lore-monorepo
+Draft initial
