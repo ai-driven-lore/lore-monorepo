@@ -1,3 +1,10 @@
+# lore-monorepo
+Draft initial
+
+Knowledge as Package
+
+"Lore" é universalmente compreendido como "corpo de conhecimento acumulado".
+
 # Lore
 
 > Registro universal para Skills, Rules e Specs de Inteligência Artificial.
