@@ -18,13 +18,12 @@ m1cloud/
 └── packages/
 ```
 
-The namespace manifest defines ownership, maintainers, metadata and policies.
+The `namespace.yaml` defines ownership, member roles, visibility and metadata for the namespace. It is the source of truth for both identity and authorization within that namespace.
 
 Example:
 
 ```yaml
 apiVersion: lore.io/v1
-
 kind: Namespace
 
 metadata:
@@ -33,7 +32,13 @@ metadata:
 spec:
   displayName: M1 Cloud
   description: Cloud, Architecture and AI packages
+  visibility: public   # public | private
 
-maintainers:
-  - moises
+members:
+  - identity: moises@mmgil.com.br
+    role: owner
+  - identity: rodrigo@example.com
+    role: publisher
 ```
+
+For the full role definitions, permission matrix and resolution algorithm see the [RBAC Specification](./rbac.md).

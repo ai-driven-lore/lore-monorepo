@@ -1,6 +1,6 @@
 # ADR-0004 - Runtime Agnostic Packages
 
-Status: Proposed
+Status: Accepted
 
 ## Context
 
