@@ -145,7 +145,7 @@ lore/
 │   ├── registry/          # Registry API
 │   ├── site/              # Web Site
 │   ├── web/               # Registry Web UI
-├── docs/
+├── .docs/                 # Documentation
 └── examples/
 ├── infrastructure/
 │   ├── helm/
