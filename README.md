@@ -143,6 +143,12 @@ lore/
 │   │   ├── packaging/
 │   │   └── registry/
 │   ├── registry/          # Registry API
+│   ├── sdk/
+│   │   ├── go/
+│   │   ├── python/
+│   │   └── typescript/
+│   │   └── dotnet/
+│   │   └── java/
 │   ├── site/              # Web Site
 │   ├── web/               # Registry Web UI
 ├── .docs/                 # Documentation
