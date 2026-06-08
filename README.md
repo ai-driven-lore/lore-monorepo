@@ -8,6 +8,14 @@ Inspired by Docker Hub, Helm Registry and Terraform Registry, Lore provides a st
 
 Instead of storing prompt files, instructions and specifications scattered across repositories, organizations can centralize their AI knowledge into a governed registry that can be consumed from any AI platform.
 
+---
+
+## Lore is not a prompt repository.
+
+Lore is a distribution platform for AI knowledge.
+
+---
+
 ## Why?
 
 Today, teams create:
@@ -30,6 +38,8 @@ Most of these assets are:
 
 Lore aims to solve this problem by creating a universal distribution layer for AI knowledge.
 
+---
+
 ## Vision
 
 Make AI knowledge portable.
@@ -47,52 +57,27 @@ A Skill published once should be consumable from:
 
 without modifications.
 
+---
+
 ## Core Concepts
 
 ### Skill
 
 Reusable capability that teaches an AI how to perform a specific task.
 
-Examples:
-
-* Azure Architect
-* Kubernetes SRE
-* Terraform Reviewer
-* Security Auditor
-* Solution Designer
-
 ### Rule
 
 Behavioral constraints and policies.
-
-Examples:
-
-* Naming conventions
-* Coding standards
-* Security requirements
-* Architectural constraints
 
 ### Spec
 
 Structured project requirements.
 
-Examples:
-
-* SDD Specifications
-* Architecture Documents
-* Product Requirements
-* Technical Standards
-
 ### Template
 
 Reusable project scaffolding.
 
-Examples:
-
-* ADR Templates
-* RFC Templates
-* SDD Templates
-* Design Documents
+---
 
 ## Registry
 
@@ -100,11 +85,17 @@ Every asset is published into a Lore Registry.
 
 Example:
 
-lore.m1cloud.io/platform/azure-architect:v1.0.0
+```text
+lore.io/platform/azure-architect:v1.0.0
+```
 
 Similar to:
 
+```text
 docker.io/library/nginx:latest
+```
+
+---
 
 ## CLI
 
@@ -114,22 +105,10 @@ Search available assets:
 lore search azure
 ```
 
-Inspect a package:
-
-```bash
-lore show platform/azure-architect
-```
-
 Install into a project:
 
 ```bash
 lore pull platform/azure-architect
-```
-
-Validate local assets:
-
-```bash
-lore validate
 ```
 
 Publish a new asset:
@@ -138,15 +117,83 @@ Publish a new asset:
 lore publish
 ```
 
-## Project Structure
+---
+
+## Future Vision
+
+Users should not need to know which Skills exist.
+
+```bash
+lore solve "knowledge to terraform compliances"
+```
+
+Lore automatically discovers, resolves and installs the most relevant Skills, Rules and Specs for the requested outcome.
+
+---
+
+## Repository Structure
 
 ```text
-.lore/
-├── skills/
-├── rules/
-├── specs/
-└── templates/
+lore/
+├── registry/          # Registry API
+├── cli/               # Lore CLI
+├── web/               # Registry Web UI
+├── pkg/
+│   ├── manifest/
+│   ├── validator/
+│   ├── packaging/
+│   └── registry/
+├── infrastructure/
+│   ├── helm/
+│   ├── terraform/
+│   └── kustomize/
+├── docs/
+└── examples/
 ```
+
+### Registry
+
+Responsible for:
+
+* Package publishing
+* Package retrieval
+* Validation workflows
+* Dependency resolution
+* Registry APIs
+
+### CLI
+
+Primary developer experience.
+
+### Web
+
+Provides:
+
+* Package discovery
+* Search
+* Documentation
+* Registry administration
+
+### Shared Packages
+
+Shared libraries used by both Registry and CLI.
+
+### Infrastructure
+
+Deployment assets and examples.
+
+Supported methods:
+
+* Helm
+* Terraform
+* Kustomize
+
+Future:
+
+* Kubernetes Operator
+* GitOps Integrations
+
+---
 
 ## Validation Engine
 
@@ -158,16 +205,15 @@ Examples:
 * Schema validation
 * Dependency validation
 * Prompt Injection detection
-* Content quality validation
 * Required translations validation
 
 Invalid assets cannot be published.
 
+---
+
 ## Internationalization
 
 Lore supports multilingual assets.
-
-Example:
 
 ```text
 azure-architect/
@@ -176,71 +222,31 @@ azure-architect/
 └── es-ES.md
 ```
 
-The CLI automatically installs the appropriate language based on user configuration.
+---
 
-## Dependencies
+## Technology Stack
 
-Assets may depend on other assets.
+| Component      | Technology                 |
+| -------------- | -------------------------- |
+| Registry API   | Go                         |
+| CLI            | Go                         |
+| Frontend       | Next.js                    |
+| Infrastructure | Helm, Terraform, Kustomize |
+| Deployment     | Kubernetes                 |
 
-Example:
+### Why Go?
 
-```yaml
-dependencies:
-  - platform/terraform-reviewer
-  - platform/security-baseline
-```
+Lore aims to be a cloud-native project focused on portability, performance and operational simplicity.
 
-Install all dependencies:
+Using Go provides:
 
-```bash
-lore install
-```
+* Single binary deployments
+* Cross-platform CLI distribution
+* Low resource consumption
+* Strong Kubernetes ecosystem integration
+* Alignment with CNCF projects and tooling
 
-## Future: Intelligent Discovery
-
-Users should not need to know which Skills exist.
-
-Future versions of Lore may analyze project context and recommend assets automatically.
-
-Example:
-
-```bash
-lore recommend
-```
-
-Output:
-
-```text
-Recommended Skills:
-
-✓ Azure Architect
-✓ Terraform Reviewer
-✓ Security Baseline
-✓ Kubernetes SRE
-```
-
-Or:
-
-```bash
-lore solve "Create a production AKS cluster"
-```
-
-And Lore automatically discovers the most relevant Skills.
-
-## MCP Integration
-
-Lore can expose registry content through MCP servers, allowing AI agents to discover and consume organizational knowledge dynamically.
-
-## Design Principles
-
-* Vendor Agnostic
-* Open Source
-* Git Friendly
-* Human Readable
-* AI Native
-* Versioned
-* Governed
-* Extensible
+---
 
 ## Roadmap
 
@@ -260,16 +266,17 @@ Lore can expose registry content through MCP servers, allowing AI agents to disc
 
 ### Phase 3
 
-* AI Recommendations
 * MCP Integration
+* AI-assisted Discovery
 * Asset Marketplace
-* Reputation System
 
 ### Phase 4
 
-* OCI Compatible Registry
+* OCI Compatibility
 * Enterprise Governance
-* Federation
+* Registry Federation
+
+---
 
 ## License
 
