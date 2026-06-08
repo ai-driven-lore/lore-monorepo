@@ -135,23 +135,25 @@ Lore automatically discovers, resolves and installs the most relevant Skills, Ru
 
 ```text
 lore/
-├── registry/          # Registry API
-├── cli/               # Lore CLI
-├── web/               # Registry Web UI
-├── pkg/
-│   ├── manifest/
-│   ├── validator/
-│   ├── packaging/
-│   └── registry/
+├── apps/
+│   ├── cli/               # Lore CLI
+│   ├── pkg/               # Packages Shareds
+│   │   ├── manifest/
+│   │   ├── validator/
+│   │   ├── packaging/
+│   │   └── registry/
+│   ├── registry/          # Registry API
+│   ├── site/              # Web Site
+│   ├── web/               # Registry Web UI
+├── docs/
+└── examples/
 ├── infrastructure/
 │   ├── helm/
 │   ├── terraform/
 │   └── kustomize/
-├── docs/
-└── examples/
 ```
 
-### Registry
+### apps/registry - Registry API 
 
 Responsible for:
 
@@ -161,11 +163,11 @@ Responsible for:
 * Dependency resolution
 * Registry APIs
 
-### CLI
+### apps/cli - CLI
 
 Primary developer experience.
 
-### Web
+### apps/web
 
 Provides:
 
@@ -174,11 +176,11 @@ Provides:
 * Documentation
 * Registry administration
 
-### Shared Packages
+### apps/pkg - Shared Packages
 
 Shared libraries used by both Registry and CLI.
 
-### Infrastructure
+### infrastructure
 
 Deployment assets and examples.
 

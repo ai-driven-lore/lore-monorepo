@@ -135,23 +135,25 @@ O Lore identifica automaticamente as Skills, Rules e Specs mais adequadas para a
 
 ```text
 lore/
-├── registry/          # Registry API
-├── cli/               # Lore CLI
-├── web/               # Interface Web
-├── pkg/
-│   ├── manifest/
-│   ├── validator/
-│   ├── packaging/
-│   └── registry/
+├── apps/
+│   ├── cli/               # Lore CLI
+│   ├── pkg/               # Packages Shareds
+│   │   ├── manifest/
+│   │   ├── validator/
+│   │   ├── packaging/
+│   │   └── registry/
+│   ├── registry/          # Registry API
+│   ├── site/              # Web Site
+│   ├── web/               # Registry Web UI
+├── docs/
+└── examples/
 ├── infrastructure/
 │   ├── helm/
 │   ├── terraform/
 │   └── kustomize/
-├── docs/
-└── examples/
 ```
 
-### Registry
+### apps/registry - Registry
 
 Responsável por:
 
@@ -161,11 +163,11 @@ Responsável por:
 * Resolução de dependências
 * APIs do Registry
 
-### CLI
+### apps/cli - CLI
 
 Principal interface para desenvolvedores.
 
-### Web
+### apps/web
 
 Responsável por:
 
@@ -174,11 +176,11 @@ Responsável por:
 * Documentação
 * Administração
 
-### Shared Packages
+### apps/pkg - Shared Packages
 
 Bibliotecas compartilhadas entre Registry e CLI.
 
-### Infrastructure
+### infrastructure
 
 Recursos de implantação.
 
