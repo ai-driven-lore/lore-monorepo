@@ -1,47 +1,46 @@
-# lore-monorepo
-Draft initial
-
-Knowledge as Package
-
-"Lore" é universalmente compreendido como "corpo de conhecimento acumulado".
-
 # Lore
 
 > Registro universal para Skills, Rules e Specs de Inteligência Artificial.
 
 Lore é uma plataforma open source para empacotar, versionar, validar e distribuir conhecimento utilizado por agentes de IA, equipes de desenvolvimento e organizações.
 
-Inspirado em projetos como Docker Hub, Helm Registry e Terraform Registry, o Lore fornece uma maneira padronizada de publicar e consumir ativos reutilizáveis como Skills, Rules, Specs, Templates e comportamentos de agentes.
+Inspirado em Docker Hub, Helm Registry e Terraform Registry, o Lore fornece uma maneira padronizada de publicar e consumir ativos reutilizáveis como Skills, Rules, Specs, Templates e comportamentos de agentes.
 
-Em vez de armazenar instruções, prompts e especificações espalhados por diversos repositórios, as organizações podem centralizar seu conhecimento em um registro governado e consumi-lo a partir de qualquer plataforma de IA.
+Em vez de armazenar instruções e especificações espalhadas em diversos repositórios, as organizações podem centralizar seu conhecimento em um registro governado e consumi-lo a partir de qualquer plataforma de IA.
 
 ---
 
-# Por que o Lore existe?
+## Lore não é um repositório de prompts.
+
+Lore é uma plataforma de distribuição de conhecimento para IA.
+
+---
+
+## Por que?
 
 Hoje as equipes criam constantemente:
 
-* Skills para agentes de IA
+* Skills para agentes
 * Regras de desenvolvimento
-* Padrões de arquitetura
+* Padrões de código
+* Padrões arquiteturais
 * Especificações SDD
-* Templates de documentação
-* Prompts e instruções reutilizáveis
+* Templates reutilizáveis
 
-Na maioria dos casos, esses artefatos ficam:
+Grande parte desses ativos fica:
 
-* Espalhados em arquivos Markdown
-* Duplicados entre projetos
-* Difíceis de descobrir
-* Difíceis de versionar
+* Espalhada em arquivos Markdown
+* Duplicada entre projetos
+* Difícil de descobrir
+* Difícil de versionar
 * Sem governança
-* Dependentes de uma ferramenta específica
+* Dependente de ferramentas específicas
 
 O Lore nasce para resolver esse problema.
 
 ---
 
-# Visão
+## Visão
 
 Tornar o conhecimento utilizado por IA portátil.
 
@@ -53,79 +52,44 @@ Uma Skill publicada uma única vez deve poder ser utilizada por:
 * Cursor
 * Windsurf
 * Continue
-* MCP Clients
 * Agentes personalizados
+* Clientes MCP
 
-sem precisar ser reescrita para cada plataforma.
-
----
-
-# Conceitos Fundamentais
-
-## Skill
-
-Uma capacidade reutilizável que ensina uma IA a executar uma tarefa específica.
-
-Exemplos:
-
-* Azure Architect
-* Kubernetes SRE
-* Terraform Reviewer
-* Security Auditor
-* Solution Designer
+sem precisar ser adaptada para cada plataforma.
 
 ---
 
-## Rule
+## Conceitos Fundamentais
 
-Restrições comportamentais e diretrizes.
+### Skill
 
-Exemplos:
+Capacidade reutilizável que ensina uma IA a executar uma tarefa específica.
 
-* Convenções de nomenclatura
-* Padrões de código
-* Requisitos de segurança
-* Restrições arquiteturais
+### Rule
 
----
+Diretrizes e restrições comportamentais.
 
-## Spec
+### Spec
 
-Especificações estruturadas que descrevem requisitos e processos.
+Especificações estruturadas de projeto.
 
-Exemplos:
-
-* SDD (Spec Driven Development)
-* Arquiteturas de referência
-* Requisitos de produto
-* Padrões técnicos
-
----
-
-## Template
+### Template
 
 Estruturas reutilizáveis para acelerar projetos.
 
-Exemplos:
-
-* ADR
-* RFC
-* Design Documents
-* Templates de SDD
-
 ---
 
-# Registry
+## Registry
 
-Todos os ativos são publicados em um Registry Lore.
+Todo ativo é publicado em um Registry Lore.
 
 Exemplo:
 
 ```text
-lore.m1cloud.io/platform/azure-architect:v1.0.0
+lore.io/platform/azure-architect:v1.0.0
 ```
 
-De forma semelhante ao Docker:
+Semelhante a:
 
 ```text
 docker.io/library/nginx:latest
@@ -133,18 +97,12 @@ docker.io/library/nginx:latest
 
 ---
 
-# CLI
+## CLI
 
-Buscar ativos disponíveis:
+Buscar ativos:
 
 ```bash
 lore search azure
-```
-
-Visualizar detalhes:
-
-```bash
-lore show platform/azure-architect
 ```
 
 Instalar em um projeto:
@@ -153,13 +111,7 @@ Instalar em um projeto:
 lore pull platform/azure-architect
 ```
 
-Validar ativos locais:
-
-```bash
-lore validate
-```
-
-Publicar um novo ativo:
+Publicar um ativo:
 
 ```bash
 lore publish
@@ -167,21 +119,85 @@ lore publish
 
 ---
 
-# Estrutura de Projeto
+## Visão de Futuro
 
-```text
-.lore/
-├── skills/
-├── rules/
-├── specs/
-└── templates/
+O usuário não deveria precisar saber previamente quais Skills existem.
+
+```bash
+lore solve "knowledge to terraform compliances"
 ```
+
+O Lore identifica automaticamente as Skills, Rules e Specs mais adequadas para atingir o objetivo solicitado.
 
 ---
 
-# Engine de Validação
+## Estrutura do Repositório
 
-Todo conteúdo publicado no Lore passa por validações automáticas.
+```text
+lore/
+├── registry/          # Registry API
+├── cli/               # Lore CLI
+├── web/               # Interface Web
+├── pkg/
+│   ├── manifest/
+│   ├── validator/
+│   ├── packaging/
+│   └── registry/
+├── infrastructure/
+│   ├── helm/
+│   ├── terraform/
+│   └── kustomize/
+├── docs/
+└── examples/
+```
+
+### Registry
+
+Responsável por:
+
+* Publicação de pacotes
+* Download de pacotes
+* Validação
+* Resolução de dependências
+* APIs do Registry
+
+### CLI
+
+Principal interface para desenvolvedores.
+
+### Web
+
+Responsável por:
+
+* Descoberta de ativos
+* Busca
+* Documentação
+* Administração
+
+### Shared Packages
+
+Bibliotecas compartilhadas entre Registry e CLI.
+
+### Infrastructure
+
+Recursos de implantação.
+
+Métodos suportados:
+
+* Helm
+* Terraform
+* Kustomize
+
+Futuro:
+
+* Kubernetes Operator
+* Integrações GitOps
+
+---
+
+## Engine de Validação
+
+Todo conteúdo publicado passa por validações automáticas.
 
 Exemplos:
 
@@ -189,18 +205,13 @@ Exemplos:
 * Validação de esquema
 * Validação de dependências
 * Detecção de Prompt Injection
-* Validação de qualidade
 * Verificação de traduções obrigatórias
-
-Conteúdos inválidos não podem ser publicados.
 
 ---
 
-# Internacionalização (i18n)
+## Internacionalização
 
-O Lore suporta múltiplos idiomas de forma nativa.
-
-Exemplo:
+O Lore suporta múltiplos idiomas.
 
 ```text
 azure-architect/
@@ -209,113 +220,50 @@ azure-architect/
 └── es-ES.md
 ```
 
-O CLI instala automaticamente a versão adequada conforme a configuração do usuário.
+---
+
+## Stack Tecnológica
+
+| Componente     | Tecnologia                 |
+| -------------- | -------------------------- |
+| Registry API   | Go                         |
+| CLI            | Go                         |
+| Frontend       | Next.js                    |
+| Infraestrutura | Helm, Terraform, Kustomize |
+| Implantação    | Kubernetes                 |
 
 ---
 
-# Dependências
+## Roadmap
 
-Ativos podem depender de outros ativos.
-
-Exemplo:
-
-```yaml
-dependencies:
-  - platform/terraform-reviewer
-  - platform/security-baseline
-```
-
-Instalar dependências:
-
-```bash
-lore install
-```
-
----
-
-# Descoberta Inteligente (Futuro)
-
-O usuário não deveria precisar saber previamente quais Skills existem.
-
-No futuro, o Lore poderá analisar o contexto do projeto e sugerir automaticamente os ativos mais adequados.
-
-Exemplo:
-
-```bash
-lore recommend
-```
-
-Resultado:
-
-```text
-Skills recomendadas:
-
-✓ Azure Architect
-✓ Terraform Reviewer
-✓ Security Baseline
-✓ Kubernetes SRE
-```
-
-Ou ainda:
-
-```bash
-lore solve "Criar um cluster AKS em produção"
-```
-
-E o Lore identifica automaticamente quais Skills, Rules e Specs devem ser utilizadas.
-
----
-
-# Integração com MCP
-
-O Lore poderá expor conteúdo através de servidores MCP, permitindo que agentes de IA descubram e consumam conhecimento organizacional dinamicamente.
-
----
-
-# Princípios do Projeto
-
-* Agnóstico de fornecedor
-* Open Source
-* Compatível com Git
-* Legível por humanos
-* Nativo para IA
-* Versionado
-* Governado
-* Extensível
-
----
-
-# Roadmap
-
-## Fase 1
+### Fase 1
 
 * Registry API
 * CLI
 * Empacotamento de Skills
 * Engine de Validação
 
-## Fase 2
+### Fase 2
 
 * Resolução de Dependências
 * Autenticação
 * Namespaces Organizacionais
 * Registries Privados
 
-## Fase 3
+### Fase 3
 
-* Recomendações por IA
 * Integração MCP
+* Descoberta Assistida por IA
 * Marketplace de Ativos
-* Sistema de Reputação
 
-## Fase 4
+### Fase 4
 
 * Compatibilidade OCI
 * Governança Corporativa
-* Federação entre Registries
+* Federação de Registries
 
 ---
 
-# Licença
+## Licença
 
-Apache 2.0
+Apache-2.0
