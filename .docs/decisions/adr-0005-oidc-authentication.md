@@ -23,6 +23,9 @@ The Registry API SHALL authenticate requests using OIDC (OpenID Connect) with st
 - The Registry SHALL NOT store tokens, sessions, or user records.
 - Token validation SHALL use the IdP's JWKS endpoint to verify JWT signatures locally.
 - The IdP SHALL be configurable via environment variables, supporting any OIDC-compliant provider (Google, GitHub, Azure AD, Okta, Keycloak, etc.).
+- `LORE_AUTH_ENABLED` SHALL be required explicitly at startup. The Registry SHALL refuse to start if it is absent or set to an unrecognized value.
+- When `LORE_AUTH_ENABLED=false`, the Registry SHALL operate in Development Mode: all write gates are open, RBAC is skipped, and the running state MUST be surfaced via startup logs, the `/_lore/info` endpoint, and an `X-Lore-Auth-Mode` response header.
+- `LORE_AUTH_OIDC_CLIENT_SECRET` is NOT a registry variable. The Registry validates tokens via JWKS public keys and never handles the client secret. This credential is configured in the CLI and Web UI only.
 - The CLI SHALL use the OAuth 2.0 Device Authorization Grant (RFC 8628) to authenticate without a browser redirect.
 - Refresh tokens SHALL be stored locally on the user's machine (`~/.lore/credentials`), never on the server.
 - Read operations on public packages SHALL be anonymous (no token required).
