@@ -146,8 +146,8 @@ lore/
 │   ├── sdk/
 │   │   ├── go/
 │   │   ├── python/
-│   │   └── typescript/
-│   │   └── dotnet/
+│   │   ├── typescript/
+│   │   ├── dotnet/
 │   │   └── java/
 │   ├── site/              # Web Site
 │   ├── web/               # Registry Web UI
