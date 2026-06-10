@@ -150,7 +150,7 @@ lore/
 │   │   ├── dotnet/
 │   │   └── java/
 │   ├── site/              # Web Site
-│   ├── web/               # Registry Web UI
+│   └── web/               # Registry Web UI
 ├── .docs/                 # Documentation
 └── examples/
 ├── infrastructure/
